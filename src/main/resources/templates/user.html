@@ -4,9 +4,10 @@
     <title>User Page</title>
 </head>
 <body>
-<h1>Welcome to User Page</h1>
-<form th:action="@{/logout}" method="post">
-    <input type="submit" value="Logout"/>
-</form>
+<h1>User Page</h1>
+<p>Username: <span th:text="${user.username}"></span></p>
+<p>Email: <span th:text="${user.email}"></span></p>
+<a th:href="@{/logout}">Logout</a>
 </body>
+
 </html>

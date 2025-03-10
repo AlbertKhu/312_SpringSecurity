@@ -7,7 +7,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-
 @Component
 public class LoginSuccessHandler implements AuthenticationSuccessHandler {
 
@@ -16,7 +15,8 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
         if (authentication.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"))) {
             response.sendRedirect("/admin/");
         } else {
-            response.sendRedirect("/user");
+            response.sendRedirect("/user/");
         }
     }
 }
+

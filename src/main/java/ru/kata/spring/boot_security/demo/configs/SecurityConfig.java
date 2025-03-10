@@ -1,6 +1,6 @@
 package ru.kata.spring.boot_security.demo.configs;
 
-import ru.kata.spring.boot_security.demo.services.UserDetailsServiceImpl;
+import ru.kata.spring.boot_security.demo.services.UserService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -11,20 +11,19 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
-
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private final UserDetailsServiceImpl userDetailsService;
+    private final UserService userService;
 
-    public SecurityConfig(UserDetailsServiceImpl userDetailsService) {
-        this.userDetailsService = userDetailsService;
+    public SecurityConfig(UserService userDetailsService) {
+        this.userService = userDetailsService;
     }
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
+        auth.userDetailsService(userService).passwordEncoder(passwordEncoder());
     }
 
     @Override
@@ -32,7 +31,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests()
                 .antMatchers("/admin/**").hasRole("ADMIN")
-                .antMatchers("/user/**").hasAnyRole("USER", "ADMIN")
+                //.antMatchers("/user/**").hasAnyRole("ADMIN", "USER")
+                .antMatchers("/user/**").authenticated()
+                //.antMatchers("/", "/login", "/registration").permitAll()
+                .antMatchers("/", "/login").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
