@@ -18,5 +18,6 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
             response.sendRedirect("/user/");
         }
     }
+
 }
 

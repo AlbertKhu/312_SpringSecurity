@@ -63,5 +63,4 @@ public class Role implements GrantedAuthority {
             return false;
         return true;
     }
-
 }
