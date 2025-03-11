@@ -29,21 +29,18 @@ public class AdminController {
         model.addAttribute("users", userRepository.findAll());
         return "admin";
     }
-    @PostMapping("/add")
+    @GetMapping("/add")
     public String addUserForm(Model model) {
         model.addAttribute("user", new User());
         model.addAttribute("roles", roleRepository.findAll());
         return "add_user";
     }
 
-    @PostMapping("/admin/add")
+    @PostMapping("/add")
     public String addUser(@ModelAttribute User user, @RequestParam("roleIds") Set<Long> roleIds) {
-        logger.info("Adding user: " + user.getUsername());
-        logger.info("Selected role IDs: " + roleIds);
         Set<Role> roles = new HashSet<>(roleRepository.findAllById(roleIds));
         user.setRoles(roles);
         userRepository.save(user);
-        logger.info("User added successfully");
         return "redirect:/admin";
     }
 
