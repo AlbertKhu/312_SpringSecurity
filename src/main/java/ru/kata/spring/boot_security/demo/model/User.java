@@ -1,4 +1,4 @@
-package ru.kata.spring.boot_security.demo.models;
+package ru.kata.spring.boot_security.demo.model;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -26,7 +26,6 @@ public class User implements UserDetails {
     )
 
     private Set<Role> roles = new HashSet<>();
-    //private Set<Role> roles;
 
     public static UserDetails fromUser(User user) {
         return new org.springframework.security.core.userdetails.User(
