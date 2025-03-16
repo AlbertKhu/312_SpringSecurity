@@ -18,7 +18,10 @@
         <td th:text="${user.email}"></td>
         <td>
             <a th:href="@{/admin/edit/{id}(id=${user.id})}">Edit</a>
-            <a th:href="@{/admin/delete/{id}(id=${user.id})}">Delete</a>
+            <form th:action="@{/admin/delete/{id}(id=${user.id})}" method="post" style="display: inline;">
+                <input type="hidden" name="_method" value="delete" />
+                <button type="submit">Delete</button>
+            </form>
         </td>
     </tr>
 </table>
