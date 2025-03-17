@@ -1,5 +1,6 @@
 package ru.kata.spring.boot_security.demo.config;
 
+import ru.kata.spring.boot_security.demo.service.UserService;
 import ru.kata.spring.boot_security.demo.service.UserServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,10 +15,10 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private final UserServiceImpl userService;
+    private final UserService userService;
 
-    public SecurityConfig(UserServiceImpl userDetailsService) {
-        this.userService = userDetailsService;
+    public SecurityConfig(UserService userService) {
+        this.userService = userService;
     }
 
     @Override
